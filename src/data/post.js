@@ -3,7 +3,7 @@ export const posts = [
     date: new Date(2023, 4, 14, 15, 20),
     id: 'anon_1',
     user: "anon",
-    likes: [],
+    likes: ['anon'],
     imgPaths: [ "/anon_1_1.jpeg", "/anon_1_2.jpeg", "/anon_1_3.jpeg"],
     content: "산책 너무 즐거워! \n내일도 모레도 계속 가고싶다!",
     location: "강서구 화곡동 우장산",
