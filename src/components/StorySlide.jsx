@@ -53,11 +53,7 @@ const SlideImg = styled.img`
 const StorySlide = ({user}) => {
   const [ curStory, setCurStory ] = useState(0);
   const userStory = stories.find((story)=> user.stories[curStory] === story.id);
-  const videoRef = useRef();
 
-  const pauseVideo = () => {
-    videoRef.current.pause();
-  };
 
   const goPrev = () => {
     setCurStory((current) => current === 0 ? user.stories.length - 1 : current - 1);
@@ -164,9 +160,8 @@ const StorySlide = ({user}) => {
           }
           return (
             <div>
-              
-              <Slide loop controls key={index} src={thisVideoSrc} state={state} ref={videoRef} />
-              <SlideImg key={index} src={thisImgSrc} state={state}  />
+              <Slide autoPlay={curStory === index ? true : false} loop={curStory === index ? true : false} muted={curStory === index ? false : true} controls key={index} src={thisVideoSrc} state={state} />
+              <SlideImg key={index} src={thisImgSrc} state={state}/>
             </div>
             );
         })}

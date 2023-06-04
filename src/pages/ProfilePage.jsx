@@ -17,6 +17,10 @@ const ProfilePage = () => {
 
   },[])
 
+  useEffect(() => {
+    document.title = `${user.name}(@${user.id}) | Instagram`;
+  }, []);
+
 
   function totalNumber (comments) {
     let number = 0;
@@ -55,7 +59,7 @@ const ProfilePage = () => {
         {user.posts.map((postId)=> {
           const post = posts.find((p)=> p.id === postId)
           return (
-            <Link to={`/posts/${post.id}`}>
+            <Link to={`/p/${post.id}`}>
             <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
               <img src={post.imgPaths[0]}/>
               <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {posts} from '../data/post';
 import {users} from '../data/user';
 import Post from '../components/Post'
@@ -6,8 +6,11 @@ import ShortThumbnail from '../components/ShortThumbnail';
 import { stories } from '../data/story';
 
 const Main = () => {
+  useEffect(() => {
+    document.title = "Instagram";
+  }, []);
   return (
-    <div className='my-[100px]'>
+    <div className='mt-[100px]'>
       <div className='h-[100px] w-auto flex flex-row justify-start items-center absolute overflow-hidden'>
       <div className='absolute left-[300px] w-[25%] h-full bg-gradient-to-r from-transparent to-white pointer-events-none z-10'></div>
       <div className='absolute left-[470px] w-full h-full bg-white pointer-events-none z-10'></div>
