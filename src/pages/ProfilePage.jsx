@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {posts} from '../data/post';
 import {users} from '../data/user';
-import { AddFriendIcon, LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from '../components/icons/Icons';
+import { AddFriendIcon, PostsIcon, TagIcon } from '../components/icons/Icons';
+import ProfileStoryCluster from '../components/ProfileStoryClusters';
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const user = users.find((e)=> userId === e.id);
   const [ storyOrNot, setStoryOrNot ] = useState(' border solid w-[130px] h-[130px] ')
+  const [ tabStatus, setTabStatus ] = useState('posts');
 
   useEffect(()=> {
     if(user.stories.length === 0) {
@@ -52,29 +54,75 @@ const ProfilePage = () => {
         <div className='cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center w-[42%] h-[35px] rounded-xl font-semibold bg-gray-200 px-3'>메시지</div>
         <div className='cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center w-[8%] h-[35px] rounded-xl font-semibold bg-gray-200 px-3'><AddFriendIcon/></div>
       </div >
-      <div className=' w-full h-[80px] flex flex-row justify-between items-center border-b solid'>
+      {user.stories.length >= 1 && (
+        <div className=' w-full h-[120px] flex flex-row justify-between items-center border-b solid'>
+          {user.stories.map((e)=> {
+            return(
+              <ProfileStoryCluster user={user} story={e}/>
+            )
+          })}
+        </div>
+      ) }
+        { tabStatus === 'posts' ? (
+          <div className=' w-full h-[60px] flex flex-row justify-around items-center pb-2'>
+            <div className=' w-[50%] h-full flex flex-row justify-center items-center cursor-pointer border-t solid border-black' onClick={()=> setTabStatus('posts')}>
+              <PostsIcon fill='rgb(0,0,0)' size={15}/> <div className='text-sm ml-2 font-semibold text-[rgb(0,0,0)]'> 게시물 </div>
+            </div>
+            <div className=' w-[50%] h-full flex flex-row justify-center items-center cursor-pointer' onClick={()=> setTabStatus('tagged')}>
+              <TagIcon fill='rgb(115,115,115)' size={15}/> <div className='text-sm ml-2 font-semibold text-[rgb(115,115,115)]'> 태그됨 </div>
+            </div>
+          </div>
+          ):(
+          <div className=' w-full h-[60px] flex flex-row justify-around items-center pb-2'>
+            <div className=' w-[50%] h-full flex flex-row justify-center items-center cursor-pointer' onClick={()=> setTabStatus('posts')}>
+              <PostsIcon fill='rgb(115,115,115)' size={15}/> <div className='text-sm ml-2 font-semibold text-[rgb(115,115,115)]'> 게시물 </div>
+            </div>
+            <div className=' w-[50%] h-full flex flex-row justify-center items-center border-t solid border-black cursor-pointer' onClick={()=> setTabStatus('tagged')}>
+              <TagIcon fill='rgb(0,0,0)' size={15}/> <div className='text-sm ml-2 font-semibold text-[rgb(0,0,0)]'> 태그됨 </div>
+            </div>
+          </div>
+        )}
 
-      </div>
-      <div className='w-full h-auto flex flex-row justify-start flex-wrap items-start'>
+      {tabStatus === 'posts' ? (
+        <div className='w-full h-auto flex flex-row justify-start flex-wrap items-start'>
         {user.posts.map((postId)=> {
           const post = posts.find((p)=> p.id === postId)
           return (
             <Link to={`/p/${post.id}`}>
-            <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
-              <img src={post.imgPaths[0]}/>
-              <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
-                <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
+              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
+                <img className='w-auto h-full absolute' src={post.imgPaths[0]}/>
+                <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
+                  <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
+                  </div>
+                  <p className='z-20'>{post.likes.length}</p>
+                  <p className='z-20'>{totalNumber(post.comments)}</p>
                 </div>
-                <p className='z-20'>{post.likes.length}</p>
-                <p className='z-20'>{totalNumber(post.comments)}</p>
               </div>
-              
-            </div>
             </Link>
           )
-
         })}
-      </div>
+        </div>
+      ):(
+        <div className='w-full h-auto flex flex-row justify-start flex-wrap items-start'>
+        {user.tagged.map((postId)=> {
+          const post = posts.find((p)=> p.id === postId)
+          return (
+            <Link to={`/p/${post.id}`}>
+              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
+                <img className='w-auto h-full absolute' src={post.imgPaths[0]}/>
+                <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
+                  <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
+                  </div>
+                  <p className='z-20'>{post.likes.length}</p>
+                  <p className='z-20'>{totalNumber(post.comments)}</p>
+                </div>
+              </div>
+            </Link>
+          )
+        })}
+        </div>
+      )}
+
 
     </div>
   )

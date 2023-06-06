@@ -124,8 +124,8 @@ function totalNumber (comments) {
         </div>
         <div className='w-auto h-auto cursor-pointer hover:opacity-60'> <SaveIcon/> </div>
       </div>
-      <div className=' w-full h-[20px] flex flex-row justify-start items-center flex-wrap '>{whoLikes(post.likes)}</div>
-      <div className='w-full flex flex-col justify-start my-3'>
+      <div className=' w-full h-auto flex flex-row justify-start items-center flex-wrap '>{whoLikes(post.likes)}</div>
+      <div className='w-full flex flex-col justify-start my-2'>
         <div className={`w-full text-sm text-left ${open}`}>
           <span className='h-[19px] w-auto font-semibold mr-1'>{user.id}</span>
           <span className='whitespace-pre-wrap'>{post.content}</span>
@@ -138,7 +138,7 @@ function totalNumber (comments) {
           })}
           </div>
         </div>
-        <div className=' w-full flex flex-row justify-start items-center text-sm text-gray-500'>
+        <div className=' w-full flex flex-row justify-start mt-1 items-center text-sm text-gray-500'>
           {isItLong() ? (
             open === 'line-clamp-2' &&
             <div className=' cursor-pointer mb-2 ' onClick={()=> {

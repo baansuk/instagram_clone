@@ -6,6 +6,24 @@ export const users = [
     following: [],
     posts: [ 'anon_1',],
     intro: "I am Anon",
-    stories: [ 'str_anon_1', 'str_anon_2' ]
+    stories: [ 
+      { 
+        name: '산책',
+        id: 'str_anon_1',
+        story: ['str_anon_1', 'str_anon_2'],
+        thumbnail: '/anon_1_1.jpeg'
+      } 
+    ],
+    tagged: []
+  },
+  {
+    name: "유저2",
+    id: "anon2",
+    follower: [],
+    following: [],
+    posts: [ 'anon_1',],
+    intro: "I am Anon2",
+    stories: [],
+    tagged: []
   },
 ]

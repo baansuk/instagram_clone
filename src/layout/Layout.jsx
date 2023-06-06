@@ -15,7 +15,7 @@ const Layout = (props) => {
               {shortOpen === undefined ? (
                 <div></div>
               ):(
-                <Story user={shortOpen}/>
+                <Story param={shortOpen}/>
               )}
               {props.children}
             </div>
