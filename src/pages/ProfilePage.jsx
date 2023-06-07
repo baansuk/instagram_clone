@@ -55,7 +55,7 @@ const ProfilePage = () => {
         <div className='cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center w-[8%] h-[35px] rounded-xl font-semibold bg-gray-200 px-3'><AddFriendIcon/></div>
       </div >
       {user.stories.length >= 1 && (
-        <div className=' w-full h-[120px] flex flex-row justify-between items-center border-b solid'>
+        <div className=' w-full h-[120px] flex flex-row justify-start items-center border-b solid'>
           {user.stories.map((e)=> {
             return(
               <ProfileStoryCluster user={user} story={e}/>
@@ -90,7 +90,7 @@ const ProfilePage = () => {
           return (
             <Link to={`/p/${post.id}`}>
               <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
-                <img className='w-auto h-full absolute' src={post.imgPaths[0]}/>
+                <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
                 <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
                   <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
                   </div>
@@ -109,7 +109,7 @@ const ProfilePage = () => {
           return (
             <Link to={`/p/${post.id}`}>
               <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
-                <img className='w-auto h-full absolute' src={post.imgPaths[0]}/>
+                <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
                 <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
                   <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
                   </div>

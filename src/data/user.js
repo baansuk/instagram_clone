@@ -9,8 +9,14 @@ export const users = [
     stories: [ 
       { 
         name: '산책',
-        id: 'str_anon_1',
+        id: 'strc_anon_1',
         story: ['str_anon_1', 'str_anon_2'],
+        thumbnail: '/anon_1_1.jpeg'
+      },
+      { 
+        name: '코딩',
+        id: 'strc_anon_1',
+        story: ['str_anon_3'],
         thumbnail: '/anon_1_1.jpeg'
       } 
     ],

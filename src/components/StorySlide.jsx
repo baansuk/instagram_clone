@@ -36,7 +36,6 @@ const SlideImg = styled.img`
   opacity: 1;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
-  z-index: 500;
   pointer-events: none;
 
   ${({ state }) => state === 'current' && css`
@@ -57,14 +56,19 @@ const StorySlide = ({user, userStories}) => {
 
   useEffect(() => {
     if (videoRefs.current[curStory]) {
-      videoRefs.current[curStory].play();
+      if (videoRefs.current[curStory]) {
+        videoRefs.current[curStory].play();
+      }
+  
+      if (videoRefs.current[curStory - 1]) {
+        videoRefs.current[curStory - 1].pause();
+      } else if (videoRefs.current[userStories.length - 1]) {
+        videoRefs.current[userStories.length - 1].pause();
+      }
+    } else {
+      return
     }
 
-    if (videoRefs.current[curStory - 1]) {
-      videoRefs.current[curStory - 1].pause();
-    } else if (videoRefs.current[userStories.length - 1]) {
-      videoRefs.current[userStories.length - 1].pause();
-    }
   }, [curStory]);
 
   const goPrev = () => {
@@ -172,8 +176,10 @@ const StorySlide = ({user, userStories}) => {
           }
           return (
             <div>
+              {thisVideoSrc !== '' && (
               <Slide autoPlay={curStory === index ? true : false} loop={curStory === index ? true : false} muted={curStory === index ? false : true} controls key={index} src={thisVideoSrc} state={state} ref={(element) => videoRefs.current[index] = element}/>
-              <SlideImg key={index} src={thisImgSrc} state={state}/>
+              )}
+              {thisImgSrc !== '' && (<SlideImg key={index} src={thisImgSrc} state={state}/>)}
             </div>
             );
         })}
