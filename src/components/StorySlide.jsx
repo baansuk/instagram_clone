@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
 import { Link } from 'react-router-dom';
 import { stories } from '../data/story';
+import { timeAgo } from '../utils/timeAgo';
 
 const Slide = styled.video`
   top: 0;
@@ -78,30 +79,6 @@ const StorySlide = ({user, userStories}) => {
   const goNext = () => {
     setCurStory((current) => current === userStories.length - 1 ? 0 : current + 1);
   };
-
-  function timeAgo(pastDate) {
-    const diffInMilliseconds = new Date().getTime() - pastDate.getTime();
-    const diffInSeconds = diffInMilliseconds / 1000;
-    
-    const diffInMinutes = diffInSeconds / 60;
-    if (diffInMinutes < 60) {
-      return `${Math.floor(diffInMinutes)}분`;
-    }
-    
-    const diffInHours = diffInMinutes / 60;
-    if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)}시간`;
-    }
-  
-    const diffInDays = diffInHours / 24;
-    if (diffInDays < 7) {
-      return `${Math.floor(diffInDays)}일`;
-    }
-  
-    const diffInWeeks = diffInDays / 7;
-      return `${Math.floor(diffInWeeks)}주`;
-  }
-
 
 
 

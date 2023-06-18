@@ -1,69 +1,13 @@
 import React, { useState } from 'react';
 import { LikeIcon, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
 import {users} from '../data/user';
+import { timeAgo } from '../utils/timeAgo';
+import { whoLikes } from '../utils/whoLikes';
+import { isItLong } from '../utils/isItLong';
 
 const Post = ({post, user}) => {
   const [ open, setOpen ] = useState('line-clamp-2');
   const [ openComments, setOpenComments ] = useState(false);
-
-  function timeAgo(pastDate) {
-    const diffInMilliseconds = new Date().getTime() - pastDate.getTime();
-    const diffInSeconds = diffInMilliseconds / 1000;
-    
-    const diffInMinutes = diffInSeconds / 60;
-    if (diffInMinutes < 60) {
-      return `${Math.floor(diffInMinutes)}분`;
-    }
-    
-    const diffInHours = diffInMinutes / 60;
-    if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)}시간`;
-    }
-  
-    const diffInDays = diffInHours / 24;
-    if (diffInDays < 7) {
-      return `${Math.floor(diffInDays)}일`;
-    }
-  
-    const diffInWeeks = diffInDays / 7;
-      return `${Math.floor(diffInWeeks)}주`;
-  }
-
-function whoLikes (likes) {
-  const likeuser = users.find((pl) => likes[0] === pl.id);
-  if(likes.length === 0) {
-    return
-  } else if (likes.length === 1) {
-    return (
-      <span className=' flex flex-row justify-start items-center text-sm h-[14px]'>
-        <div className=' rounded-full w-[14px] h-[14px] relative overflow-hidden border solid mr-2'>
-          <img className='w-full' src={likeuser.imgPath}/>
-        </div>
-        <p className='font-semibold'>{likes[0]}</p>님이 좋아합니다.
-      </span>
-    )
-  } else {
-    return (
-      <span className=' flex flex-row justify-start items-center  text-sm h-[14px]'>
-        <div className=' rounded-full w-[14px] h-[14px] relative overflow-hidden border solid mr-2'>
-          <img className='w-full' src={likeuser.imgPath}/>
-        </div>
-        <p className='font-semibold'>{likes[0]}</p>님 <p className='font-semibold ml-1'>외 {likes.length - 1}명</p>이 좋아합니다.
-      </span>
-    )
-  }
-}
-
-function isItLong () {
-  const textElement = document.querySelector('.line-clamp-2');
-  if (textElement){
-    if (textElement.scrollHeight > textElement.clientHeight) {
-  return true
-  } else {
-  return false
-  }
-} else return true
-}
 
   return (
     <div className='h-auto w-[470px] text-sm'>

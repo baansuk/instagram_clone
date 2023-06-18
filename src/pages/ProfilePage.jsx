@@ -4,6 +4,7 @@ import {posts} from '../data/post';
 import {users} from '../data/user';
 import { AddFriendIcon, PostsIcon, TagIcon } from '../components/icons/Icons';
 import ProfileStoryCluster from '../components/ProfileStoryClusters';
+import { totalNumber } from '../utils/totalNumber';
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -22,16 +23,6 @@ const ProfilePage = () => {
   useEffect(() => {
     document.title = `${user.name}(@${user.id}) | Instagram`;
   }, []);
-
-
-  function totalNumber (comments) {
-    let number = 0;
-    for(let i = 0; i < comments.length; i++){
-      number += comments[i].subComments.length
-    };
-    const commentAmount = comments.length;
-    return commentAmount + number;
-  }
 
   return (
     <div className='mt-[80px] h-[2000px] flex flex-col justify-start items-start'>
