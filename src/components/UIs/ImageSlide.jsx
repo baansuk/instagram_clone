@@ -5,7 +5,7 @@ const Slide = styled.img`
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 1;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
