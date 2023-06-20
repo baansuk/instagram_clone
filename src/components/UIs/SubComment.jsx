@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
-import {users} from '../data/user';
-import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
-import { timeAgo } from '../utils/timeAgo';
+import {users} from '../../data/user';
+import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from '../icons/Icons';
+import { timeAgo } from '../../utils/timeAgo';
 
 const SubComment = ({subComment, subCommentUser}) => {
 
