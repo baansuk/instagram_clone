@@ -84,7 +84,7 @@ const ProfilePage = () => {
           const post = posts.find((p)=> p.id === postId)
           return (
             <Link to={`/p/${post.id}`}>
-              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center '>
+              <div className='w-[156px] h-[156px] relative overflow-hidden flex flex-col justify-center items-center border border-white solid'>
                 <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
                 <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
                   <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
@@ -99,21 +99,25 @@ const ProfilePage = () => {
         </div>
       ):(
         <div className='w-full h-auto flex flex-row justify-start flex-wrap items-start'>
-        {user.tagged.map((postId)=> {
-          const post = posts.find((p)=> p.id === postId)
-          return (
-            <Link to={`/p/${post.id}`}>
-              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center '>
-                <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
-                <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
-                  <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
+        {posts.map((post)=> {
+          if(post.userTags.find((tag)=> tag === user.id)) {
+            return (
+              <Link to={`/p/${post.id}`}>
+                <div className='w-[156px] h-[156px] relative overflow-hidden flex flex-col justify-center items-center border border-white solid'>
+                  <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
+                  <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
+                    <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
+                    </div>
+                    <p className='z-20'>{post.likes.length}</p>
+                    <p className='z-20'>{totalNumber(post.comments)}</p>
                   </div>
-                  <p className='z-20'>{post.likes.length}</p>
-                  <p className='z-20'>{totalNumber(post.comments)}</p>
                 </div>
-              </div>
-            </Link>
-          )
+              </Link>
+            )
+          } else {
+            return
+          }
+
         })}
         </div>
       )}
