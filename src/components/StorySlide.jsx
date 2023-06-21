@@ -57,15 +57,23 @@ const StorySlide = ({user, userStories}) => {
 
   useEffect(() => {
     if (videoRefs.current[curStory]) {
-      if (videoRefs.current[curStory]) {
-        videoRefs.current[curStory].play();
+      if(userStories.length === 1) {
+        if (videoRefs.current[curStory]) {
+          videoRefs.current[curStory].play();
+        }
+      } else {
+        if (videoRefs.current[curStory]) {
+          videoRefs.current[curStory].play();
+        }
+    
+        if (videoRefs.current[curStory - 1]) {
+          videoRefs.current[curStory - 1].pause();
+        } else if (videoRefs.current[userStories.length - 1]) {
+          videoRefs.current[userStories.length - 1].pause();
+        }
       }
-  
-      if (videoRefs.current[curStory - 1]) {
-        videoRefs.current[curStory - 1].pause();
-      } else if (videoRefs.current[userStories.length - 1]) {
-        videoRefs.current[userStories.length - 1].pause();
-      }
+
+
     } else {
       return
     }

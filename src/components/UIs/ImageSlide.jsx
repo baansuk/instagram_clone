@@ -34,7 +34,7 @@ const ImageSlide = ({imgs}) => {
 
 
   return (
-    <div className='w-[470px] h-[700px] rounded-md border solid flex flex-row flex-nowrap overflow-hidden justify-start items-center relative'>
+    <div className='w-[470px]  h-[618px] min-h-[470px] rounded-md border solid flex flex-row flex-nowrap overflow-hidden justify-start items-center relative'>
       {imgs.length > 1 && (
         <div className='w-[470px] h-full absolute flex flex-row justify-between items-center'>
           {curImg === 0 ? (

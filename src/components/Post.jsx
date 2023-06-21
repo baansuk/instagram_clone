@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { LikeIcon, CommentIcon, SendIcon, SaveIcon } from './icons/Icons';
 import {users} from '../data/user';
 import { totalNumber } from '../utils/totalNumber'
@@ -7,10 +7,13 @@ import { isItLong } from '../utils/isItLong';
 import UpperPost from './UIs/UpperPost';
 import ImageSlide from './UIs/ImageSlide';
 import Comment from './UIs/Comment';
+import { Link } from 'react-router-dom';
+import { ModalContext } from '../layout/Layout';
 
 const Post = ({post, user}) => {
   const [ open, setOpen ] = useState('line-clamp-2');
   const [ openComments, setOpenComments ] = useState(false);
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
 
 
   return (
@@ -26,10 +29,10 @@ const Post = ({post, user}) => {
         </div>
         <div className='w-auto h-auto cursor-pointer hover:opacity-60'> <SaveIcon/> </div>
       </div>
-      <div className=' w-full h-auto flex flex-row justify-start items-center flex-wrap '>{whoLikes(post.likes)}</div>
+      <div className=' w-full h-auto flex flex-row justify-start items-center flex-wrap cursor-pointer' onClick={()=> setModalOpen({type:'좋아요', content: post.likes})}>{whoLikes(post.likes)}</div>
       <div className='w-full flex flex-col justify-start my-2'>
         <div className={`w-full text-sm text-left ${open}`}>
-          <span className='h-[19px] w-auto font-semibold mr-1'>{user.id}</span>
+        <Link to={`/${user.id}`}> <span className='h-[19px] w-auto font-semibold mr-1'>{user.id}</span> </Link>
           <span className='whitespace-pre-wrap'>{post.content}</span>
           <br/>
           <div className='flex flex-row justify-start items-start flex-wrap'>

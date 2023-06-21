@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {posts} from '../data/post';
 import {users} from '../data/user';
 import { AddFriendIcon, PostsIcon, TagIcon } from '../components/icons/Icons';
 import ProfileStoryCluster from '../components/ProfileStoryClusters';
 import { totalNumber } from '../utils/totalNumber';
+import { ModalContext } from '../layout/Layout';
+import { whoFollows } from '../utils/whoFollows';
 
 const ProfilePage = () => {
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
   const { userId } = useParams();
   const user = users.find((e)=> userId === e.id);
   const [ storyOrNot, setStoryOrNot ] = useState(' border solid w-[130px] h-[130px] ')
   const [ tabStatus, setTabStatus ] = useState('posts');
+  const follower = whoFollows(user.id);
 
   useEffect(()=> {
     if(user.stories.length === 0) {
@@ -28,12 +32,12 @@ const ProfilePage = () => {
     <div className='mt-[80px] h-[2000px] flex flex-col justify-start items-start'>
       <div className='w-full h-[150px] flex flex-row justify-start items-center'>
         <div className={`rounded-full relative overflow-hidden mr-5 flex justify-center items-center ${storyOrNot}`}>
-          <img className='w-[130px] h-auto absolute rounded-full' src={`/${user.id}.jpg`}/>
+          <img className='w-[130px] h-[130px] absolute rounded-full' src={`/${user.id}.jpg`}/>
         </div>
         <div className='w-[300px] h-[130px] flex flex-row justify-around items-center'>
           <div className='flex flex-col justify-center items-center'><p className='font-semibold'>{user.posts.length}</p><p>게시물</p></div>
-          <div className='flex flex-col justify-center items-center'><p className='font-semibold'>{user.follower.length}</p><p>팔로워</p></div>
-          <div className='flex flex-col justify-center items-center'><p className='font-semibold'>{user.following.length}</p><p>팔로잉</p></div>
+          <div className='flex flex-col justify-center items-center cursor-pointer' onClick={()=> setModalOpen({type:'팔로워', content: follower})}><p className='font-semibold'>{follower.length}</p><p>팔로워</p></div>
+          <div className='flex flex-col justify-center items-center cursor-pointer' onClick={()=> setModalOpen({type:'팔로잉', content: user.following})}><p className='font-semibold'>{user.following.length}</p><p>팔로잉</p></div>
         </div>
       </div>
       <div className=' w-full h-auto flex flex-col justify-start items-start'>
@@ -80,7 +84,7 @@ const ProfilePage = () => {
           const post = posts.find((p)=> p.id === postId)
           return (
             <Link to={`/p/${post.id}`}>
-              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
+              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center '>
                 <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
                 <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
                   <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>
@@ -99,7 +103,7 @@ const ProfilePage = () => {
           const post = posts.find((p)=> p.id === postId)
           return (
             <Link to={`/p/${post.id}`}>
-              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center border solid'>
+              <div className='w-[156px] h-[160px] relative overflow-hidden flex flex-col justify-center items-center '>
                 <img className='w-full h-full object-cover object-center absolute' src={post.imgPaths[0]}/>
                 <div className=' cursor-pointer z-20 w-full h-full opacity-0 hover:opacity-100 text-white font-semibold absolute flex flex-col justify-center items-center'>
                   <div className=' cursor-pointer w-full h-full opacity-30 bg-black absolute'>

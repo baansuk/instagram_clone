@@ -1,21 +1,21 @@
 import React, { ReactNode, createContext, useState } from "react";
 import Header from "./Header";
-import Story from "../components/Story";
+import Modal from "../components/Modal";
 
 export const ModalContext = createContext(undefined);
 
 const Layout = (props) => {
-  const [ shortOpen, setShortOpen ] = useState(undefined);
+  const [ modalOpen, setModalOpen ] = useState(undefined);
   return (
     <>
         <div className=" w-full min-h-[70vh] mb-[200px] flex flex-col items-center">
-          <ModalContext.Provider value={{ shortOpen, setShortOpen }}>
+          <ModalContext.Provider value={{ modalOpen, setModalOpen }}>
             <div className="w-[470px]">
               <Header />
-              {shortOpen === undefined ? (
+              {modalOpen === undefined ? (
                 <div></div>
               ):(
-                <Story param={shortOpen}/>
+                <Modal type={modalOpen.type} param={modalOpen.content}/>
               )}
               {props.children}
             </div>
