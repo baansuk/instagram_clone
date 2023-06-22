@@ -18,9 +18,7 @@ const SubComment = ({subComment, subCommentUser}) => {
         return <span  className='text-[#00376B] mr-1'>@{taggedUser}</span>
       })}{subComment.content}</div>
       <div className='w-full my-2 flex flex-row justify-start items-start text-xs text-gray-500'>
-      <span className='mr-3 cursor-pointer'>
-        {subComment.likes.length !== 0 && `좋아요 ${subComment.likes.length}개`}
-            </span>
+        {subComment.likes.length !== 0 && <span className='mr-3 cursor-pointer'> {`좋아요  ${subComment.likes.length}개`} </span>}
             <span className='cursor-pointer'>
               답글 달기 
             </span>

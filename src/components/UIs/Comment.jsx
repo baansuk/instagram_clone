@@ -16,16 +16,16 @@ const Comment = ({comment, commentUser}) => {
         </Link>
         <div className='w-[90%] flex flex-col justify-start items-start ml-2'>
           <div className='w-full flex flex-row justify-between items-center'>
-            <div className='flex flex-col justify-start items-start ml-2'>
+            <div className='flex flex-col justify-start items-start'>
             <span><Link to={`/${commentUser.id}`}><p className='font-semibold inline-block'>{commentUser.id}</p></Link> <p className='text-gray-500 inline-block ml-1'>{timeAgo(comment.date)}</p></span> 
             <div className='w-[370px] h-auto text-left'>{comment.content}</div>
             </div>                      
             <LikeIconSmall/>
           </div>
           <div className='w-full my-2 flex flex-row justify-start items-start text-xs text-gray-500'>
-            <span className='mr-3 cursor-pointer'>
-              {comment.likes.length !== 0 && `좋아요 ${comment.likes.length}개`}
-            </span>
+            
+              {comment.likes.length !== 0 && <span className='mr-3 cursor-pointer'>{`좋아요 ${comment.likes.length}개`}</span>}
+
             <span className='cursor-pointer'>
               답글 달기 
             </span>
