@@ -4,7 +4,7 @@ import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } fr
 import { Link } from 'react-router-dom';
 import { stories } from '../data/story';
 import { timeAgo } from '../utils/timeAgo';
-import { users } from '../data/user';
+import users from '../data/user.json';
 import { ModalContext } from '../layout/Layout';
 
 const UserList = ({type, userList}) => {

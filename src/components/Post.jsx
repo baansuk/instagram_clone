@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { LikeIcon, CommentIcon, SendIcon, SaveIcon } from './icons/Icons';
-import {users} from '../data/user';
+import users from '../data/user.json';
 import { totalNumber } from '../utils/totalNumber'
 import { whoLikes } from '../utils/whoLikes'
 import { isItLong } from '../utils/isItLong';

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {posts} from '../data/post';
-import {users} from '../data/user';
+import users from '../data/user.json';
 import Post from '../components/Post'
 
 const PostPage = () => {

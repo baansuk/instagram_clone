@@ -1,4 +1,4 @@
-import { users } from "../data/user";
+import users from "../data/user.json";
 
 export function whoFollows(userId) {
   const followers = [];

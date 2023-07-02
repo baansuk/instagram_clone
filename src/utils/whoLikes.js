@@ -1,4 +1,4 @@
-import {users} from '../data/user';
+import users from "../data/user.json";
 
 export function whoLikes (likes) {
   const likeuser = users.find((pl) => likes[0] === pl.id);

@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
-import {users} from '../../data/user';
+import users from '../../data/user.json';
 import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from '../icons/Icons';
 import SubComment from './SubComment';
 import { timeAgo } from '../../utils/timeAgo';

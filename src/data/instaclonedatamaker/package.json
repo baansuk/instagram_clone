@@ -1,0 +1,17 @@
+{
+  "name": "instaclonedatamaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "tsc && electron .",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "baansuk",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^x.y.z",
+    "typescript": "^x.y.z"
+  }
+}
