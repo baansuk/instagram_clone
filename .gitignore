@@ -1,3 +1,5 @@
 node_modules
-# /src/data/*
+/src/data/post.json
+/src/data/user.json
+/src/data/story.json
 /public/*

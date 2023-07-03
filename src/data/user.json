@@ -2,7 +2,10 @@
   {
     "name": "황반석",
     "id": "anon",
-    "following": [],
+    "following": [
+      "anon2",
+      "anoanw"
+    ],
     "posts": [
       "anon_1"
     ],
@@ -30,7 +33,9 @@
   {
     "name": "유저2",
     "id": "anon2",
-    "following": [],
+    "following": [
+      "dd"
+    ],
     "posts": [
       "anon_1"
     ],
@@ -43,6 +48,18 @@
     "following": [],
     "posts": [],
     "intro": "ㄷ",
+    "stories": [],
+    "tagged": []
+  },
+  {
+    "name": "박황반",
+    "id": "parkhwangban",
+    "following": [
+      "anon2",
+      " anon"
+    ],
+    "posts": [],
+    "intro": "gggg",
     "stories": [],
     "tagged": []
   }

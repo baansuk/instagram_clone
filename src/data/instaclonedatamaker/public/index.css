@@ -5,32 +5,20 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
 
 }
 
 #container {
   border: 0.5px solid rgb(166, 166, 166);
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  height: 450px;
+  padding: 10px;
   width: 90%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-#subcontainer-upper {
-  width: 100%;
-  display: flex;
   flex-direction: row;
   justify-content: space-around;
-}
-
-#subcontainer-lower {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  align-items: flex-start;
 }
 
 #button-area {
@@ -38,12 +26,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: flex-start;
 }
 
 .lists {
   margin: 10px;
   width: 30%;
-  height: 300px;
+  height: 95%;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -74,13 +63,13 @@ body {
 
 .name-list {
   width: 100%;
-  margin: 8px;
+  margin: 5px;
   cursor: pointer;
 }
 
 #new-user {
   width: 100%;
-  margin: 8px;
+  margin: 5px;
   cursor: pointer;
   background-color: rgb(255, 118, 118);
 }
@@ -91,18 +80,19 @@ body {
 }
 
 #inputs {
+  height: 95%;
   width: 60%;
-  height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border: 1px solid gray;
   margin: 10px;
+  overflow: auto;
 }
 
 .input-part {
-  width: 340px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -115,11 +105,11 @@ body {
 }
 
 .input-input {
-  width: 200px;
+  width: 400px;
 }
 
 textarea {
-  width: 200px;   /* 원하는 너비로 설정 */
+  width: 400px;   /* 원하는 너비로 설정 */
   height: 100px;  /* 원하는 높이로 설정 */
   resize: none;  
 }
