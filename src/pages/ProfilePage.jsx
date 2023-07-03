@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {posts} from '../data/post';
-import {users} from '../data/user';
+import users from '../data/user.json';
 import { AddFriendIcon, PostsIcon, TagIcon } from '../components/icons/Icons';
 import ProfileStoryCluster from '../components/ProfileStoryClusters';
 import { totalNumber } from '../utils/totalNumber';

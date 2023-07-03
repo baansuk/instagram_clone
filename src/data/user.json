@@ -1,0 +1,66 @@
+[
+  {
+    "name": "황반석",
+    "id": "anon",
+    "following": [
+      "anon2",
+      "anoanw"
+    ],
+    "posts": [
+      "anon_1"
+    ],
+    "intro": "I am Anon",
+    "stories": [
+      {
+        "name": "산책",
+        "id": "strc_anon_1",
+        "story": [
+          "str_anon_1",
+          "str_anon_2"
+        ],
+        "thumbnail": "/anon_1_1.jpeg"
+      },
+      {
+        "name": "코딩",
+        "id": "strc_anon_1",
+        "story": [
+          "str_anon_3"
+        ],
+        "thumbnail": "/anon_1_1.jpeg"
+      }
+    ]
+  },
+  {
+    "name": "유저2",
+    "id": "anon2",
+    "following": [
+      "dd"
+    ],
+    "posts": [
+      "anon_1"
+    ],
+    "intro": "I am Anon2ddd",
+    "stories": []
+  },
+  {
+    "name": "황요셉",
+    "id": "ㅎㅁ",
+    "following": [],
+    "posts": [],
+    "intro": "ㄷ",
+    "stories": [],
+    "tagged": []
+  },
+  {
+    "name": "박황반",
+    "id": "parkhwangban",
+    "following": [
+      "anon2",
+      " anon"
+    ],
+    "posts": [],
+    "intro": "gggg",
+    "stories": [],
+    "tagged": []
+  }
+]

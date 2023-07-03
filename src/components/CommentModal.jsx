@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { LikeIcon, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
-import {users} from '../data/user';
 import { timeAgo } from '../utils/timeAgo';
 import { whoLikes } from '../utils/whoLikes';
 import { isItLong } from '../utils/isItLong';
