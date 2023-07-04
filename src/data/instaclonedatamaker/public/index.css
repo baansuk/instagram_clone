@@ -21,8 +21,8 @@ body {
   align-items: flex-start;
 }
 
-#button-area {
-  width: 90%;
+.button-area {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

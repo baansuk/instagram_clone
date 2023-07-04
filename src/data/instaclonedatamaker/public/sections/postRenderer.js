@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const userDrop = require('../utils/userDrop');
+const { addPost } = require('../service/user.service');
+const { deletePost } = require('../service/post.service');
 
 function postRender() {
 
@@ -80,13 +82,18 @@ function postRender() {
           <input class="input-input" type="text" id="userTags" name="userTags" value="${thisPostData.userTags.length > 0 ? thisPostData.userTags.toString() : ''}">
         </div>
         <div class="input-part">
-          <label class="input-label" for="imgPaths">Images</label>
+          <label class="input-label" for="imgPaths">IMAGES</label>
           <input class="input-input" type="file" id="imgPaths" name="imgPaths" multiple>
         </div>
-        <input type="submit" value="Submit">
+        <div class="button-area">
+        <input class="section-button" type="submit" value="SUBMIT">
+        <button class="section-button" id="remove">DELETE</button>
+        </div>
       </form>`
 
+      const removeBtn = document.getElementById('remove');
       const form = document.getElementById('post-form');
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
       
@@ -144,6 +151,10 @@ function postRender() {
           inputPart.reload();
         });
       });
+      removeBtn.addEventListener('click', async function(e){
+        e.preventDefault();
+        await deletePost(thisPostData.user, thisPostData.id);
+      })
     })
   })
     newPost.addEventListener('click', async()=> {
@@ -184,11 +195,11 @@ function postRender() {
           <label class="input-label" for="imgPaths">Images</label>
           <input class="input-input" type="file" id="imgPaths" name="imgPaths" multiple>
         </div>
-        <input type="submit" value="Submit">
+        <input class="section-button" type="submit" value="SUBMIT">
       </form>`
 
       const form = document.getElementById('post-form');
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const indexNo = posts.length + 1;
 
@@ -247,6 +258,7 @@ function postRender() {
           }
           inputPart.reload();
         })
+        await addPost(user, `${user}_${indexNo}`);
       })
     })
   })

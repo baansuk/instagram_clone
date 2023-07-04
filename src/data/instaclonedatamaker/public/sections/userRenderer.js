@@ -56,7 +56,7 @@ function userRender() {
           <label class="input-label" for="id">FOLLOWING</label>
           <textarea class="input-input" type="text" id="follow" name="follow">${thisUserData.following.length > 0 ? thisUserData.following.toString() : ''}</textarea>
         </div>
-        <input type="submit" value="Submit">
+        <input class="section-button" type="submit" value="SUBMIT">
       </form>`
 
       const form = document.getElementById('user-form');
@@ -109,7 +109,7 @@ function userRender() {
           <label class="input-label" for="id">FOLLOWING</label>
           <textarea class="input-input" type="text" id="follow" name="follow"></textarea>
         </div>
-        <input type="submit" value="Submit">
+        <input class="section-button" type="submit" value="SUBMIT">
       </form>`
 
       const form = document.getElementById('user-form');
