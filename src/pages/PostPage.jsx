@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {posts} from '../data/post';
+import posts from '../data/post.json';
 import users from '../data/user.json';
 import Post from '../components/Post'
 

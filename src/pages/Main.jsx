@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {posts} from '../data/post';
+import posts from '../data/post.json';
 import users from '../data/user.json';
 import Post from '../components/Post'
 import ShortThumbnail from '../components/ShortThumbnail';
-import { stories } from '../data/story';
+import stories from '../data/story.json';
+
+const sortedPosts = posts.sort((a, b) => new Date(a.date) - new Date(b.date)).reverse();
 
 const Main = () => {
   const [slidePosition, setSlidePosition] = useState(0);
@@ -53,7 +55,7 @@ const Main = () => {
       </div>
       
       <div className='absolute mt-[50px]'>
-      {posts.slice(0).reverse().map((e)=> {
+      {sortedPosts.map((e)=> {
         const thisUser = users.find((user)=>e.user === user.id);
         return(
           <Post post={e} user={thisUser}/>

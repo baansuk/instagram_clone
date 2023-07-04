@@ -1,7 +1,14 @@
 import users from "../data/user.json";
 
 export function whoLikes (likes) {
+  
   const likeuser = users.find((pl) => likes[0] === pl.id);
+  
+  if (!likeuser) {
+    console.error('No user found for id:', likes[0]);
+    return null;
+  }
+
   if(likes.length === 0) {
     return
   } else if (likes.length === 1) {

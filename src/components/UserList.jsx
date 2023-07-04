@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
 import { Link } from 'react-router-dom';
-import { stories } from '../data/story';
-import { timeAgo } from '../utils/timeAgo';
 import users from '../data/user.json';
 import { ModalContext } from '../layout/Layout';
 

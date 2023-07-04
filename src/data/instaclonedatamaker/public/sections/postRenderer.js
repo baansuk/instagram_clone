@@ -50,10 +50,6 @@ function postRender() {
         inputPart.innerHTML = `
         <form id="post-form">
         <div class="input-part">
-          <label class="input-label" for="id">ID</label>
-          <input class="input-input" type="text" id="id" name="id" value="${thisPostData.id}">
-        </div>
-        <div class="input-part">
           <label class="input-label" for="user">USER</label>
           <select name="user" id="user">
           ${userdrop}
@@ -83,6 +79,10 @@ function postRender() {
           <label class="input-label" for="userTags">USERTAGS</label>
           <input class="input-input" type="text" id="userTags" name="userTags" value="${thisPostData.userTags.length > 0 ? thisPostData.userTags.toString() : ''}">
         </div>
+        <div class="input-part">
+          <label class="input-label" for="imgPaths">Images</label>
+          <input class="input-input" type="file" id="imgPaths" name="imgPaths" multiple>
+        </div>
         <input type="submit" value="Submit">
       </form>`
 
@@ -90,7 +90,7 @@ function postRender() {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
       
-        const id = document.getElementById('id').value;
+        const id = thisPostData.id;
         const user = document.getElementById('user').value;
         const date = document.getElementById('date').value;
         const location = document.getElementById('location').value;
@@ -98,6 +98,27 @@ function postRender() {
         const tags = document.getElementById('tags').value.split(',');
         const likes = document.getElementById('likes').value.split(',');
         const userTags = document.getElementById('userTags').value.split(',');
+        const imgPathInput = document.getElementById('imgPaths');
+
+        let imgPaths = [];
+        for (let i = 0; i < imgPathInput.files.length; i++) {
+          const file = imgPathInput.files[i];
+          // '/postImgs/' 디렉토리가 존재하는지 확인하고, 없으면 생성합니다.
+          const uploadDir = '../../../public/postImgs';
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir);
+          }
+    
+          // 파일 저장 경로를 절대 경로로 변경했습니다.
+          const newImgPath = `/postImgs/${user}_${indexNo}_${i}.jpg`;
+          const data = fs.readFileSync(file.path);
+    
+          // Write file to new path
+          fs.writeFileSync(`${uploadDir}/${user}_${indexNo}_${i}.jpg`, data);
+    
+          // Add the path of the uploaded file to the imgPaths array
+          imgPaths.push(newImgPath);
+        }
       
         // 해당 유저를 찾아서 정보를 업데이트
         const postIndex = posts.findIndex((post) => post.id === thisPostId);
@@ -108,6 +129,7 @@ function postRender() {
         posts[postIndex].content = content; 
         posts[postIndex].tags = tags; 
         posts[postIndex].likes = likes; 
+        posts[postIndex].imgPaths = imgPaths; 
         posts[postIndex].userTags = userTags; 
       
         // 유저 정보를 다시 문자열로 변환
@@ -124,17 +146,15 @@ function postRender() {
       });
     })
   })
-    newPost.addEventListener('click', ()=> {
-
+    newPost.addEventListener('click', async()=> {
+      const userdrop = await userDrop();
       inputPart.innerHTML = `
         <form id="post-form">
         <div class="input-part">
-          <label class="input-label" for="id">ID</label>
-          <input class="input-input" type="text" id="id" name="id">
-        </div>
-        <div class="input-part">
           <label class="input-label" for="user">USER</label>
-          <input class="input-input" type="text" id="user" name="user">
+          <select name="user" id="user">
+          ${userdrop}
+          </select>
         </div>
         <div class="input-part">
           <label class="input-label" for="date">DATE</label>
@@ -160,14 +180,18 @@ function postRender() {
           <label class="input-label" for="userTags">USERTAGS</label>
           <input class="input-input" type="text" id="userTags" name="userTags">
         </div>
+        <div class="input-part">
+          <label class="input-label" for="imgPaths">Images</label>
+          <input class="input-input" type="file" id="imgPaths" name="imgPaths" multiple>
+        </div>
         <input type="submit" value="Submit">
       </form>`
 
       const form = document.getElementById('post-form');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+        const indexNo = posts.length + 1;
 
-        const id = document.getElementById('id').value;
         const user = document.getElementById('user').value;
         const date = document.getElementById('date').value;
         const location = document.getElementById('location').value;
@@ -175,16 +199,38 @@ function postRender() {
         const tags = document.getElementById('tags').value.split(',');
         const likes = document.getElementById('likes').value.split(',');
         const userTags = document.getElementById('userTags').value.split(',');
+        const imgPathInput = document.getElementById('imgPaths');
+
+        let imgPaths = [];
+        for (let i = 0; i < imgPathInput.files.length; i++) {
+          const file = imgPathInput.files[i];
+          // '/postImgs/' 디렉토리가 존재하는지 확인하고, 없으면 생성합니다.
+          const uploadDir = '../../../public/postImgs';
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir);
+          }
+    
+          // 파일 저장 경로를 절대 경로로 변경했습니다.
+          const newImgPath = `/postImgs/${user}_${indexNo}_${i}.jpg`;
+          const data = fs.readFileSync(file.path);
+    
+          // Write file to new path
+          fs.writeFileSync(`${uploadDir}/${user}_${indexNo}_${i}.jpg`, data);
+    
+          // Add the path of the uploaded file to the imgPaths array
+          imgPaths.push(newImgPath);
+        }
+        
       
         // 해당 유저를 찾아서 정보를 업데이트
         posts.push({
           date: new Date(date),
           user,
-          id,
+          id: `${user}_${indexNo}`,
           likes,
-          imgPath: [],
+          imgPaths,
           content,
-          location,
+          location: location === ''? null : location,
           tags,
           userTags,
           comments: []

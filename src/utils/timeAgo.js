@@ -1,4 +1,5 @@
-export function timeAgo(pastDate) {
+export function timeAgo(pastDateRaw) {
+  const pastDate = new Date(pastDateRaw);
   const diffInMilliseconds = new Date().getTime() - pastDate.getTime();
   const diffInSeconds = diffInMilliseconds / 1000;
   

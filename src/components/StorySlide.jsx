@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { LikeIcon, LikeIconSmall, CommentIcon, SendIcon, MoreIcon, SaveIcon } from './icons/Icons';
 import { Link } from 'react-router-dom';
-import { stories } from '../data/story';
+import stories from '../data/story.json';
 import { timeAgo } from '../utils/timeAgo';
 
 const Slide = styled.video`

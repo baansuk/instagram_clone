@@ -11,7 +11,7 @@
   "author": "baansuk",
   "license": "ISC",
   "dependencies": {
-    "electron": "^x.y.z",
-    "typescript": "^x.y.z"
+    "electron": "^13.1.7",
+    "typescript": "^4.3.5"
   }
 }
