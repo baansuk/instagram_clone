@@ -6,7 +6,6 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 12px;
-
 }
 
 #container {
@@ -63,8 +62,6 @@ form {
   width: 100%;
 }
 
-
-
 .name-list {
   width: 100%;
   margin: 5px;
@@ -79,6 +76,24 @@ form {
 }
 
 .name-list.selected {
+  background-color: black;
+  color: white;
+}
+
+.comment-content-list {
+  width: 100%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#new-comment {
+  width: 100%;
+  margin: 5px;
+  cursor: pointer;
+  background-color: rgb(196, 255, 118);
+}
+
+.comment-content-list.selected {
   background-color: black;
   color: white;
 }
@@ -103,8 +118,21 @@ form {
   margin: 10px;
 }
 
+#comment-part {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
 .input-label {
   margin-right: 10px;
+  font-weight: 800;
+}
+
+.comment-input-label {
+  margin: 0 10px;
   font-weight: 800;
 }
 
@@ -113,7 +141,45 @@ form {
 }
 
 textarea {
-  width: 70%;   /* 원하는 너비로 설정 */
-  height: 100px;  /* 원하는 높이로 설정 */
-  resize: none;  
+  width: 70%; /* 원하는 너비로 설정 */
+  height: 100px; /* 원하는 높이로 설정 */
+  resize: none;
+}
+
+textarea.add-area {
+  width: 100%; /* 원하는 너비로 설정 */
+  height: 100px; /* 원하는 높이로 설정 */
+  resize: none;
+}
+.input-adding-area {
+  width: 70%; /* 원하는 너비로 설정 */
+}
+
+#comment-section {
+  border: 0.5px solid rgb(166, 166, 166);
+  margin: 10px;
+  height: auto;
+  padding: 5px;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+#comment-input-part {
+  height: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid gray;
+  margin: 10px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 }

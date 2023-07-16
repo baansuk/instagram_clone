@@ -1,109 +1,106 @@
-const fs = require('fs').promises;
+const fs = require("fs").promises;
 
 async function getUsers() {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
     return users;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
   }
 }
 
 async function getUser(id) {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
-    const user = users.find(user => user.id === id)
+    const user = users.find((user) => user.id === id);
     return user;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
   }
 }
 
 async function deleteUser(id) {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
-    
-    const updatedUsers = users.filter(user => user.id !== id);
-    await fs.writeFile('../user.json', JSON.stringify(updatedUsers, null, 2));
-    
+
+    const updatedUsers = users.filter((user) => user.id !== id);
+    await fs.writeFile("../user.json", JSON.stringify(updatedUsers, null, 2));
+
     return true;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
     return false;
   }
 }
 
 async function patchUser(id, updatedData) {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
-    
-    const updatedUsers = users.map(user => {
+
+    const updatedUsers = users.map((user) => {
       if (user.id === id) {
         return { ...user, ...updatedData };
       }
       return user;
     });
-    
-    await fs.writeFile('../user.json', JSON.stringify(updatedUsers, null, 2));
-    
+
+    await fs.writeFile("../user.json", JSON.stringify(updatedUsers, null, 2));
+
     return true;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
     return false;
   }
 }
 
 async function addPost(id, post) {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
-    
-    const updatedUsers = users.map(user => {
+
+    const updatedUsers = users.map((user) => {
       if (user.id === id) {
         const posts = user.posts;
+        if (posts.find((p) => p === post)) {
+          return user;
+        }
         posts.push(post);
         return { ...user, posts };
       }
       return user;
     });
-    
-    await fs.writeFile('../user.json', JSON.stringify(updatedUsers, null, 2));
-    
+
+    await fs.writeFile("../user.json", JSON.stringify(updatedUsers, null, 2));
+
     return true;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
     return false;
   }
 }
 
 async function removePost(id, postId) {
   try {
-    const data = await fs.readFile('../user.json', 'utf-8');
+    const data = await fs.readFile("../user.json", "utf-8");
     const users = JSON.parse(data);
-    
-    const updatedUsers = users.map(user => {
+
+    const updatedUsers = users.map((user) => {
       if (user.id === id) {
-        const posts = user.posts.filter(post => post !== postId);
+        const posts = user.posts.filter((post) => post !== postId);
         return { ...user, posts };
       }
       return user;
     });
-    
-    await fs.writeFile('../user.json', JSON.stringify(updatedUsers, null, 2));
-    
+
+    await fs.writeFile("../user.json", JSON.stringify(updatedUsers, null, 2));
+
     return true;
-    
   } catch (err) {
-    window.alert('Error:', err);
+    window.alert("Error:", err);
     return false;
   }
 }
@@ -114,5 +111,5 @@ module.exports = {
   deleteUser,
   patchUser,
   addPost,
-  removePost
+  removePost,
 };

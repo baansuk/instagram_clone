@@ -4,6 +4,8 @@ import posts from '../data/post.json';
 import users from '../data/user.json';
 import Post from '../components/Post'
 
+
+
 const PostPage = () => {
   const { postId } = useParams();
   const post = posts.find((e)=> postId === e.id);

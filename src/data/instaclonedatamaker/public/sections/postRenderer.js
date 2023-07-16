@@ -3,6 +3,7 @@ const path = require("path");
 const userDrop = require("../utils/userDrop");
 const { addPost } = require("../service/user.service");
 const { deletePost } = require("../service/post.service");
+const commentRender = require("./commentRender");
 
 function postRender() {
   const inputPart = document.getElementById("inputs");
@@ -65,7 +66,7 @@ function postRender() {
         <div class="input-part">
           <label class="input-label" for="location">LOCATION</label>
           <input class="input-input" type="text" id="location" name="location" value="${
-            thisPostData.location
+            thisPostData.location !== null ? thisPostData.location : ""
           }">
         </div>
         <div class="input-part">
@@ -82,9 +83,18 @@ function postRender() {
         </div>
         <div class="input-part">
           <label class="input-label" for="likes">LIKES</label>
-          <textarea class="input-input" type="text" id="likes" name="likes">${
-            thisPostData.likes.length > 0 ? thisPostData.likes.toString() : ""
-          }</textarea>
+          <div class="input-adding-area">
+            <div>
+              <select name="userLike" id="user-like">
+              ${userdrop}
+              </select>
+              <button id="add-like">ADD
+              </button>
+            </div>
+            <textarea class="input-input add-area" type="text" id="likes" name="likes">${
+              thisPostData.likes.length > 0 ? thisPostData.likes.toString() : ""
+            }</textarea>
+          </div>
         </div>
         <div class="input-part">
           <label class="input-label" for="userTags">USERTAGS</label>
@@ -102,12 +112,31 @@ function postRender() {
         <input class="section-button" type="submit" value="SUBMIT">
         <button class="section-button" id="remove">DELETE</button>
         </div>
-      </form>`;
+      </form>
+      <div id="comment-part">
+      <label class="comment-input-label" for="userTags">COMMENTS</label>
+      <div id="comment-section">
+        <div id="comment-list" class="lists">
+          </div>
+          <div id="comment-input-part">
+          </div>
+        </div>
+      </div>`;
+
+        commentRender(thisPostData.comments, posts, thisPostData.id);
 
         const removeBtn = document.getElementById("remove");
         const form = document.getElementById("post-form");
+        const addLike = document.getElementById("add-like");
 
-        form.addEventListener("submit", function (e) {
+        addLike.addEventListener("click", function (e) {
+          e.preventDefault();
+          const likeArea = document.getElementById("likes");
+          const likeUser = document.getElementById("user-like");
+          likeArea.value += `${likeUser.value},`;
+        });
+
+        form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
           const id = thisPostData.id;
@@ -115,12 +144,12 @@ function postRender() {
           const date = document.getElementById("date").value;
           const location = document.getElementById("location").value;
           const content = document.getElementById("content").value;
-          const tags = document.getElementById("tags").value.split(",");
+          const tags = document.getElementById("tags").value.split(/,|#/);
           const likes = document.getElementById("likes").value.split(",");
           const userTags = document.getElementById("userTags").value.split(",");
           const imgPathInput = document.getElementById("imgPaths");
 
-          let imgPaths = [];
+          let imgPaths = thisPostData.imgPaths;
           for (let i = 0; i < imgPathInput.files.length; i++) {
             const file = imgPathInput.files[i];
             // '/postImgs/' 디렉토리가 존재하는지 확인하고, 없으면 생성합니다.
@@ -130,11 +159,11 @@ function postRender() {
             }
 
             // 파일 저장 경로를 절대 경로로 변경했습니다.
-            const newImgPath = `/postImgs/${user}_${indexNo}_${i}.jpg`;
+            const newImgPath = `/postImgs/${id}_${i}.jpg`;
             const data = fs.readFileSync(file.path);
 
             // Write file to new path
-            fs.writeFileSync(`${uploadDir}/${user}_${indexNo}_${i}.jpg`, data);
+            fs.writeFileSync(`${uploadDir}/${id}_${i}.jpg`, data);
 
             // Add the path of the uploaded file to the imgPaths array
             imgPaths.push(newImgPath);
@@ -147,8 +176,10 @@ function postRender() {
           posts[postIndex].date = new Date(date);
           posts[postIndex].location = location === "" ? null : location;
           posts[postIndex].content = content;
-          posts[postIndex].tags = tags;
-          posts[postIndex].likes = likes;
+          posts[postIndex].tags =
+            tags.length === 1 && tags[0] === "" ? [] : tags;
+          posts[postIndex].likes =
+            likes.length === 1 && likes[0] === "" ? [] : likes;
           posts[postIndex].imgPaths = imgPaths;
           posts[postIndex].userTags = userTags;
 
@@ -163,6 +194,8 @@ function postRender() {
             }
             postRender();
           });
+
+          await addPost(user, thisPostData.id);
         });
         removeBtn.addEventListener("click", async function (e) {
           e.preventDefault();
@@ -224,9 +257,9 @@ function postRender() {
         const date = document.getElementById("date").value;
         const location = document.getElementById("location").value;
         const content = document.getElementById("content").value;
-        const tags = document.getElementById("tags").value.split(",");
+        const tags = document.getElementById("tags").value.split(/,|#/);
         const likes = document.getElementById("likes").value.split(",");
-        const userTags = document.getElementById("userTags").value.split(",");
+        const userTags = document.getElementById("userTags").value.split(/,|#/);
         const imgPathInput = document.getElementById("imgPaths");
 
         let imgPaths = [];
