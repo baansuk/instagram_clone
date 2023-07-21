@@ -205,9 +205,13 @@ function userRender() {
             fs.mkdirSync(uploadDir);
           }
           fs.writeFileSync(`${uploadDir}/${id}.jpg`, data);
-        }
-        const uploadDir = "../../../public/";
-        fs.writeFileSync(`${uploadDir}/${id}.jpg`, "../../../public/anon.jpg");
+        } else {
+          const uploadDir = "../../../public/";
+          fs.writeFileSync(
+            `${uploadDir}/${id}.jpg`,
+            "../../../public/anon.jpg"
+          );
+        
 
         // 해당 유저를 찾아서 정보를 업데이트
         users.push({
